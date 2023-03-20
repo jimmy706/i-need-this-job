@@ -1,0 +1,16 @@
+@import '../../styles/variables.scss';
+
+.header {
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    h2 {
+        color: $strong-text-color;
+    }
+}
+
+.form-content {
+    margin-top: 30px;
+}

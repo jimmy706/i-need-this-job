@@ -1,0 +1,83 @@
+$primary-color: #bf4080;
+$secondary-color: #0070f3;
+$strong-text-color: #372868;
+$text-color: #190a4b;
+
+// ---- Spacing ----
+.m-0 {
+  margin: 0;
+}
+
+.m-1 {
+  margin: 0.25rem;
+}
+
+.m-2 {
+  margin: 0.5rem;
+}
+
+.m-3 {
+  margin: 1rem;
+}
+
+
+.p-0 {
+  padding: 0;
+}
+
+.p-1 {
+  padding: 0.25rem;
+}
+
+.p-2 {
+  padding: 0.5rem;
+}
+
+.p-3 {
+  padding: 1rem;
+}
+
+// ---- Display ----
+
+.d-block {
+  display: block;
+}
+
+.d-inline {
+  display: inline;
+}
+
+.d-inline-block {
+  display: inline-block;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.d-none {
+  display: none;
+}
+
+// ---- Position ----
+
+.position-static {
+  position: static;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+.position-fixed {
+  position: fixed;
+}
+
+// ---- Width ----
+.w-full {
+  width: 100%;
+}

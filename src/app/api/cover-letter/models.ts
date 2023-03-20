@@ -1,5 +1,6 @@
 export interface TargetCompany {
     name: string,
+    managerName: string,
     locationBased?: string,
 }
 
@@ -13,5 +14,6 @@ export interface RequestBody {
     name: string,
     applyPossition: string,
     targetCompany:TargetCompany,
-    options?: Options
+    options?: Options,
+    signedName: string
 }
