@@ -1,0 +1,13 @@
+.main {
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  max-height: calc(100vh / 1.2);  
+}
+
+.submit-btn {
+  position: sticky;
+  left: 0;
+  bottom: 0;
+}

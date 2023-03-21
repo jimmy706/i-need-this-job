@@ -15,5 +15,6 @@ export interface RequestBody {
     applyPossition: string,
     targetCompany:TargetCompany,
     options?: Options,
-    signedName: string
+    signedName: string,
+    skills: string[]
 }
