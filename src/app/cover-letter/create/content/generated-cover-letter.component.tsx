@@ -1,4 +1,4 @@
-import { memo, useContext } from "react";
+import { useContext } from "react";
 import { CoverLetterContext } from "../cover-letter.context";
 import styles from './generated-cover-letter.module.scss';
 
@@ -6,9 +6,8 @@ export type GeneratedCoverLetterProps = {
     letter?: string
 }
 
-const GeneratedCoverLetter = memo(function ({ letter }: GeneratedCoverLetterProps) {
+const GeneratedCoverLetter = function () {
     const coverLetterContext = useContext(CoverLetterContext);
-    console.log(coverLetterContext)
 
     return (
         <div className={styles.container}>
@@ -22,11 +21,11 @@ const GeneratedCoverLetter = memo(function ({ letter }: GeneratedCoverLetterProp
                     className={styles['cover-letter-content']}
                     readOnly
                     placeholder="Generated cover letter"
-                    defaultValue={letter}>
+                    value={coverLetterContext.coverLetter}>
                 </textarea>
             </div>
         </div>
     )
-});
+};
 
 export default GeneratedCoverLetter;

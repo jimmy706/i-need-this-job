@@ -1,51 +1,94 @@
-@import './variables.scss';
+@import "./variables.scss";
 
 // Primary button styles
 
-.btn--primary {
-  background-color: $primary-color;
+.btn {
   color: #fff;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
   cursor: pointer;
   font-weight: 700;
+  position: relative;
 
-  &:hover {
-    background-color: lighten($primary-color, 10%);
+  &--primary {
+    background-color: $primary-color;
+    &:hover {
+      background-color: lighten($primary-color, 10%);
+    }
+
+    &:active {
+      background-color: darken($primary-color, 10%);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
 
-  &:active {
-    background-color: darken($primary-color, 10%);
+  &--secondary {
+    background-color: $secondary-color;
+
+    &:hover {
+      background-color: lighten($secondary-color, 10%);
+    }
+
+    &:active {
+      background-color: darken($secondary-color, 10%);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
 
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: loading 1s ease-in-out infinite;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 2;
+  }
+  &::before {
+    content: '';
+    border: inherit;
+    border-radius: inherit;
+    position: absolute;
+    background-color: inherit;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+  }
+  &.loading {
+    pointer-events: none;
+    &::after {
+      opacity: 1;
+    }
+    &::before {
+      opacity: 1;
+    }
   }
 }
 
-// Secondary button styles
-
-.btn--secondary {
-  background-color: $secondary-color;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-weight: 500;
-
-  &:hover {
-    background-color: lighten($secondary-color, 10%);
+@keyframes loading {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
   }
-
-  &:active {
-    background-color: darken($secondary-color, 10%);
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
   }
 }

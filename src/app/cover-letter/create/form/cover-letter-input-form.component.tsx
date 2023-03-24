@@ -1,6 +1,7 @@
 "use client";
 
-import { FormEvent, useState } from 'react';
+import { FormEvent, useContext, useState } from 'react';
+import { CoverLetterContext } from '../cover-letter.context';
 import styles from './cover-letter-input-form.module.scss';
 
 export type CoverLetterInputFormState = {
@@ -10,10 +11,12 @@ export type CoverLetterInputFormState = {
 }
 
 export type CoverLetterInputFormProps = {
-    onSubmit?: (value: CoverLetterInputFormState) => void
+    onSubmit?: (value: CoverLetterInputFormState) => void,
 }
 
 export default function CoverLetterInputForm({ onSubmit }: CoverLetterInputFormProps) {
+    const coverLetterContext = useContext(CoverLetterContext);
+
     const [form, setForm] = useState<CoverLetterInputFormState>({
         name: '',
         copanyName: '',
@@ -65,7 +68,7 @@ export default function CoverLetterInputForm({ onSubmit }: CoverLetterInputFormP
                 </div>
             </div>
 
-            <button className={`btn--primary w-full ${styles['submit-btn']}`} type="submit">Create cover letter</button>
+            <button className={`btn ${coverLetterContext.fetching ? 'loading' : '' } btn--primary w-full ${styles['submit-btn']}`} type="submit">Create cover letter</button>
         </form>
     )
 }

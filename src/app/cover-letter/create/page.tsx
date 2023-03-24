@@ -3,8 +3,10 @@
 import { useState } from 'react';
 import GeneratedCoverLetter from "./content/generated-cover-letter.component";
 import { CoverLetterContext, CoverLetterContextType } from "./cover-letter.context";
-import CoverLetterInputForm from "./form/cover-letter-input-form.component";
+import { mapCoverLetterInputToRequestBody } from './cover-letter.mapper';
+import CoverLetterInputForm, { CoverLetterInputFormState } from "./form/cover-letter-input-form.component";
 import styles from './page.module.scss';
+import { generateCoverLetter } from './service/cover-letter.service';
 
 export default function () {
     const [state, setState] = useState<CoverLetterContextType>({
@@ -12,6 +14,14 @@ export default function () {
         coverLetter: '',
         fileName: 'Untitled'
     });
+
+    const handleSubmit = async (value: CoverLetterInputFormState) => {
+        setState({ ...state, fetching: true });
+        const requestBody = mapCoverLetterInputToRequestBody(value);
+        const response = await generateCoverLetter(requestBody);        
+        setState({ ...state, coverLetter: response.data.result, fetching: false });
+    }
+
     return (
         <CoverLetterContext.Provider value={state}>
             <div className={styles.page}>
@@ -21,7 +31,7 @@ export default function () {
                             <h2>Your information</h2>
                         </header>
                         <div className={`${styles['form-content']}`}>
-                            <CoverLetterInputForm />
+                            <CoverLetterInputForm onSubmit={handleSubmit} />
                         </div>
                     </div>
 
