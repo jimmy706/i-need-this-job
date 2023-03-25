@@ -1,28 +1,24 @@
 import { useContext } from "react";
 import { CoverLetterContext } from "../cover-letter.context";
 import styles from './generated-cover-letter.module.scss';
-
+import CoverLetterEditor from './cover-letter-editor.component';
 export type GeneratedCoverLetterProps = {
     letter?: string
 }
 
 const GeneratedCoverLetter = function () {
     const coverLetterContext = useContext(CoverLetterContext);
+    
 
     return (
         <div className={styles.container}>
             <header>
                 <div className={`${styles.header}`}>
-                    <input type="text" defaultValue="File name" />
+                    <input type="text" value={coverLetterContext.fileName} />
                 </div>
             </header>
             <div className={`${styles['cover-letter-container']}`}>
-                <textarea
-                    className={styles['cover-letter-content']}
-                    readOnly
-                    placeholder="Generated cover letter"
-                    value={coverLetterContext.coverLetter}>
-                </textarea>
+                <CoverLetterEditor generatedContent={coverLetterContext.coverLetter}/>
             </div>
         </div>
     )
