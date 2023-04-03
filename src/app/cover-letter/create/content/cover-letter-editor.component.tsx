@@ -28,6 +28,7 @@ export default function CoverLetterEditor({ onChange, generatedContent }: CoverL
     }
     let i = 0;
     textareaRef.current.readOnly = false;
+    textareaRef.current.value = '';
     createTypingEffect(i, generatedContent, textareaRef.current);
   }, [generatedContent]);
 
