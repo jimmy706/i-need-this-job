@@ -11,13 +11,19 @@
   }
 
   // Define the style for the text input
+  textarea.input {
+    resize: none;
+    min-height: 120px;
+    overflow-y: auto;
+  }
+
   .input {
     border: 2px solid #dedede;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 0.5rem;
     width: 100%;
-    line-height: 1.8;
+    line-height: 1.8;    
     // Define the style for the focus state
     &:focus {
       outline: none;

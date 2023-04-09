@@ -9,12 +9,15 @@ export type GeneratedCoverLetterProps = {
 const GeneratedCoverLetter = function () {
     const coverLetterContext = useContext(CoverLetterContext);
     
+    function handleChangeFileName(e: any) {
+        console.log(e.target.value)
+    }
 
     return (
         <div className={styles.container}>
             <header>
                 <div className={`${styles.header}`}>
-                    <input type="text" value={coverLetterContext.fileName} />
+                    <input type="text" onChange={handleChangeFileName} value={coverLetterContext.fileName} />
                 </div>
             </header>
             <div className={`${styles['cover-letter-container']}`}>

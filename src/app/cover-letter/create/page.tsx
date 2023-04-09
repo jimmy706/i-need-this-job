@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from 'react';
 import GeneratedCoverLetter from "./content/generated-cover-letter.component";
 import { CoverLetterContext, CoverLetterContextType } from "./cover-letter.context";

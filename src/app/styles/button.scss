@@ -4,12 +4,19 @@
 
 .btn {
   color: #fff;
+  background-color: #d1d1d1;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
   cursor: pointer;
   font-weight: 700;
   position: relative;
+  display: inline-block;
+
+  &--circle {
+    border-radius: 100%;
+    padding: 5px;
+  }
 
   &--primary {
     background-color: $primary-color;
@@ -72,6 +79,7 @@
     height: 100%;
     opacity: 0;
     pointer-events: none;
+    display: none;
   }
   &.loading {
     pointer-events: none;

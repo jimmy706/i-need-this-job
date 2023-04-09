@@ -73,3 +73,12 @@ h5 {
   @extend .container;
   max-width: none;
 }
+
+.material-icons {
+  vertical-align: middle;
+}
+
+.hr {
+  display: block;
+  border: 1px solid #ddd;
+}

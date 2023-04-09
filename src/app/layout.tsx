@@ -1,4 +1,5 @@
 import './globals.scss'
+import 'material-icons/iconfont/material-icons.scss';
 
 export const metadata = {
   title: 'Create Next App',
