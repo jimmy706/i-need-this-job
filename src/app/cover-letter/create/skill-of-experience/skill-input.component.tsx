@@ -66,7 +66,7 @@ export default function SkillInput({ onSave, onCancel, existedSkill }: Props) {
                 </select>
             </div>
 
-            <div className="input-container">
+            {/* <div className="input-container">
                 <label className="label" htmlFor="skill-desc">Description</label>
                 <textarea id="skill-desc"
                     className="input"
@@ -74,7 +74,7 @@ export default function SkillInput({ onSave, onCancel, existedSkill }: Props) {
                     value={skillState.description}
                     onChange={(e) => setSkillState({ ...skillState, description: e.target.value })}>
                 </textarea>
-            </div>
+            </div> */}
 
             <div className="d-flex mt-3">
                 <button type="button" className="btn btn--secondary mr-2" onClick={handleAddSkill}>Save</button>

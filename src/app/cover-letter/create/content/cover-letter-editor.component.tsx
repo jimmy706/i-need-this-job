@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React, { RefObject, useEffect, useRef } from 'react';
 import styles from './generated-cover-letter.module.scss';
 
 
 export type CoverLetterEditor = {
   onChange?: (value: string) => void,
-  generatedContent: string
+  generatedContent: string,
+  textareaRef: RefObject<HTMLTextAreaElement>
 }
 
 function createTypingEffect(i = 0, text: string, ref: HTMLTextAreaElement) {
@@ -12,15 +13,13 @@ function createTypingEffect(i = 0, text: string, ref: HTMLTextAreaElement) {
     ref.value = ref.value += text.charAt(i);
     ref.classList.add('.typing');
     i++;
-    setTimeout(() => createTypingEffect(i, text, ref), Math.floor(Math.random()*16) + 15);
+    setTimeout(() => createTypingEffect(i, text, ref), Math.floor(Math.random()*16));
   } else {
     ref.classList.remove('.typing');
   }
 }
 
-export default function CoverLetterEditor({ onChange, generatedContent }: CoverLetterEditor) {
-
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+export default function CoverLetterEditor({ onChange, generatedContent, textareaRef }: CoverLetterEditor) {
 
   useEffect(() => {
     if (!generatedContent || !textareaRef.current) {

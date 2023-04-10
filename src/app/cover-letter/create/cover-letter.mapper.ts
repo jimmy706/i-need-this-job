@@ -9,8 +9,9 @@ export function mapCoverLetterInputToRequestBody(value: CoverLetterInputFormStat
             managerName: value.copanyName,
             name: value.copanyName
         },
-        skills: [],
-        signedName: value.name,        
+        skills: value.skills,
+        signedName: value.name, 
+        standOutSights: []       
     }
 
 

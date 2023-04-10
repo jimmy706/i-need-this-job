@@ -25,6 +25,13 @@
 
 .cover-letter-container {
   flex-grow: 1;
+  position: relative;
+}
+
+.copy-content {
+  position: absolute;
+  top: 5px;
+  right: 10px;
 }
 
 .cover-letter-content {

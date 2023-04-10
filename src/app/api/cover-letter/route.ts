@@ -1,6 +1,8 @@
+import { extractOpenAIChatMessage, extractOpenAICompletion } from "@/app/utils/openai.utils";
 import { Configuration, OpenAIApi } from "openai";
+import GenerateAdditionalInformationService from "./generate-additional.service";
 import GeneratPromptService from "./generate-prompt";
-import { GenerateCoverLetterRequestBody } from "./models";
+import { AdditionalInformationType, GenerateCoverLetterRequestBody } from "./models";
 import { convertGeneratedPromptToCoverLetter } from "./text-converter.service";
 
 const configuration = new Configuration({
@@ -14,7 +16,7 @@ export async function POST(request: Request) {
       JSON.stringify({
         error: {
           message:
-            "OpenAI API key not configured, please follow instructions in README.md",
+            "OpenAI API key not configured",
         },
       }),
       {
@@ -23,15 +25,20 @@ export async function POST(request: Request) {
     );
   }
   try {
-    const result = await getPromptResponse();
-    const coverLetter = result.data.choices[0].text as string;
+    const result: any = await getPromptResponse();
+    const coverLetter = extractOpenAICompletion(result) as string;
     const bodyContent = await request.json();
+    let responseData = convertGeneratedPromptToCoverLetter(
+      coverLetter,
+      flattenRequestBody(bodyContent)
+    );
+    if (bodyContent.skills?.length) {
+      const yearsOfExperiencePrompt = await generateAdditionalInformation(AdditionalInformationType.EXPERIENCE_DESCRIPTION, responseData as string, bodyContent.skills);
+      responseData = extractOpenAIChatMessage(yearsOfExperiencePrompt) as string;
+    }
     return new Response(
       JSON.stringify({
-        result: convertGeneratedPromptToCoverLetter(
-          coverLetter,
-          flattenRequestBody(bodyContent)
-        ),
+        result: responseData,
       }),
       { status: 201 }
     );
@@ -55,9 +62,22 @@ export async function POST(request: Request) {
   }
 }
 
-function getPromptResponse(request?: GenerateCoverLetterRequestBody) {
+function getPromptResponse() {
   const generatePromptService = new GeneratPromptService(openai);
   return generatePromptService.generatePrompt();
+}
+
+async function generateAdditionalInformation(type: AdditionalInformationType, previousContext: string, additionalData: any) {
+  const generateAdditionalService = new GenerateAdditionalInformationService(openai);
+  let result: any = previousContext;
+  if (type === AdditionalInformationType.EXPERIENCE_DESCRIPTION) {
+    result = await generateAdditionalService.generateExperienceSkills(previousContext, additionalData, 500);
+  }
+  else if (type === AdditionalInformationType.STANDOUT_SIGHTS) {
+    result = await generateAdditionalService.generateStandoutSights(previousContext, additionalData, 500);
+  }
+  console.log(result)
+  return result;
 }
 
 function flattenRequestBody(body: GenerateCoverLetterRequestBody | null) {

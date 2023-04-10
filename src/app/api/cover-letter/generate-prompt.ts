@@ -7,11 +7,11 @@ export default class GeneratPromptService {
     this.openai = openai;
   }
 
-  generatePrompt(skills: string) {
+  generatePrompt() {
     return this.openai.createCompletion({
       model: "text-davinci-003",
       prompt:
-        'Create cover a letter template that have these parameters: applyerName, managerName, applyPossition, targetCompanyName, industry, signedName. The letter should cover information like: name, willingness to work. The start of the letter should be like this: \n"Dear ${managerName}, \nMy name is ${applyerName}',
+        'Create cover a letter template that have these parameters: applyerName, managerName, applyPossition, targetCompanyName, signedName. The letter should cover information like: name, willingness to work. The start of the letter should be like this: \n"Dear ${managerName}, \nMy name is ${applyerName}',
       temperature: 0.3,
       max_tokens: 300,
       top_p: 1,

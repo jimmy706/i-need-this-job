@@ -68,7 +68,7 @@
     z-index: 2;
   }
   &::before {
-    content: '';
+    content: "";
     border: inherit;
     border-radius: inherit;
     position: absolute;
@@ -79,7 +79,6 @@
     height: 100%;
     opacity: 0;
     pointer-events: none;
-    display: none;
   }
   &.loading {
     pointer-events: none;
@@ -98,5 +97,13 @@
   }
   100% {
     transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.clickable-icon {
+  cursor: pointer;
+  &:focus, &:active {
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 0 2px $secondary-color;
   }
 }

@@ -17,8 +17,13 @@ export default function () {
     const handleSubmit = async (value: CoverLetterInputFormState) => {
         setState({ ...state, fetching: true });
         const requestBody = mapCoverLetterInputToRequestBody(value);
-        const response = await generateCoverLetter(requestBody);        
-        setState({ ...state, coverLetter: response.data.result, fetching: false });
+        try {
+            const response = await generateCoverLetter(requestBody);
+            setState({ ...state, coverLetter: response.data.result, fetching: false });
+        } catch (error) {
+            console.log(error);
+            setState({ ...state, fetching: false })
+        } 
     }
 
     return (
